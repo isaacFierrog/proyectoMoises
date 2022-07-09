@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+    Sensores
+{% endblock %}
+
+{% block contenido %}
+    <form method="post">
+        {% csrf_token %}
+        {% if modulos %}
+            <select name="modulo">
+                {% for modulo in modulos %}
+                    <option value="{{ modulo.id }}">{{ modulo.id }}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+        <input type="submit" value="Agregar sensor">
+    </form>
+
+    {% if sensores %}
+        <h2>Listado de sensores</h2>
+    {% else %}
+        <h2>No hay sensores disponibles</h2>
+    {% endif %}
+{% endblock %}

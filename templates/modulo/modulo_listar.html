@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+    Modulos
+{% endblock %}
+
+{% block contenido %}
+    {% if modulos %}
+        <header class="d-flex space-b">
+            <h2>Listado de modulos</h2>
+            <form class="form" method="post">
+                {% csrf_token %}
+                <input class="form__submit" type="submit" value="Agregar modulo">
+            </form>
+        </header>
+
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for modulo in modulos %}
+                    <tr>
+                        <td>{{ modulo.id }}</td>
+                        <td>{{ modulo.estado }}</td>
+                        <td>{{ modulo.fecha_cracion }}</td>
+                        <td>
+                            <a href="{% url 'modulos:eliminar' modulo.id %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No hay modulos registrados</h2>
+    {% endif %}
+{% endblock %}
