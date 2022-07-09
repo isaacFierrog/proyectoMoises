@@ -21,7 +21,9 @@ class SensorModel(models.Model):
         'modulo.ModuloModel', 
         on_delete=models.CASCADE,
         blank=True,
-        related_name='sensores'
+        null=True,
+        related_name='sensores',
+        default=None
     )
     
     class Meta:

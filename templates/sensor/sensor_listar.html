@@ -14,11 +14,35 @@
                 {% endfor %}
             </select>
         {% endif %}
-        <input type="submit" value="Agregar sensor">
+        <input type="submit" value="Agregar sensor" class="form__submit">
     </form>
 
     {% if sensores %}
         <h2>Listado de sensores</h2>
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Modulo</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sensor in sensores %}
+                    <tr>
+                        <td>{{ sensor.id }}</td>
+                        <td>{{ sensor.estado }}</td>
+                        <td>{{ sensor.fecha_cracion }}</td>
+                        <td>{{ sensor.modulo.id }}</td>
+                        <td>
+                            <a href="{% url 'sensores:eliminar' sensor.id %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <h2>No hay sensores disponibles</h2>
     {% endif %}

@@ -1,26 +1,34 @@
 from django.shortcuts import redirect, render
-from django.views.generic import ListView
 from .models import SensorModel, ValorModel
 from apps.modulo.models import ModuloModel
 
-
-# class SensorView(ListView):
-#     model = SensorModel
-#     queryset = SensorModel.objects.filter(estado=True)
-#     template_name = 'sensor/sensor.html'
-#     context_object_name = 'sensores'
 
 def listar_sensores(request):
     sensores = SensorModel.objects.filter(estado=True)
     modulos = ModuloModel.objects.filter(estado=True)
     
     if(request.method == 'POST'):
+        id_modulo = request.POST['modulo']
         id_sensor = hex(sensores.count()).split('0x')[1]
-        SensorModel.objects.create(id=id_sensor)
+        modulo = ModuloModel.objects.filter(id=id_modulo).first()
+        SensorModel.objects.create(
+            id=id_sensor,
+            modulo=modulo
+        )
         
-        return redirect('modulos:listado')
+        print(request.POST)
+        
+        return redirect('sensores:listado')
     
     return render(request, 'sensor/sensor_listar.html', {
         'sensores': sensores,
         'modulos': modulos
     })
+    
+    
+def eliminar_sensor(request, id):
+    sensor = SensorModel.objects.filter(id=id).first()
+    sensor.estado = False
+    sensor.save()
+    
+    return redirect('sensores:listado')
