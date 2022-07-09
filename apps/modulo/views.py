@@ -3,7 +3,7 @@ from .models import ModuloModel
     
     
 def listar_modulos(request):
-    modulos = ModuloModel.objects.filter(estado=True)
+    modulos = ModuloModel.objects.all()
     
     if request.method == 'POST':
         id_modulo = hex(modulos.count()).split('0x')[1]
@@ -12,7 +12,7 @@ def listar_modulos(request):
         return redirect('modulos:listado')
     
     return render(request, 'modulo/modulo_listar.html', {
-        'modulos': modulos
+        'modulos': modulos.filter(estado=True)
     })
 
 
