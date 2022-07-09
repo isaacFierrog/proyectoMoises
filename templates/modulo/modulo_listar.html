@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block contenido %}
+    <form class="form" method="post">
+        {% csrf_token %}
+        <input class="form__submit" type="submit" value="Agregar modulo">
+    </form>
+    
     {% if modulos %}
         <header class="d-flex space-b">
             <h2>Listado de modulos</h2>
-            <form class="form" method="post">
-                {% csrf_token %}
-                <input class="form__submit" type="submit" value="Agregar modulo">
-            </form>
         </header>
 
         <table class="tabla">
