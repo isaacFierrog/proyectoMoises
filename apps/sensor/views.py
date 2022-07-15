@@ -4,24 +4,22 @@ from apps.modulo.models import ModuloModel
 
 
 def listar_sensores(request):
-    sensores = SensorModel.objects.filter(estado=True)
     modulos = ModuloModel.objects.filter(estado=True)
+    sensores = SensorModel.objects.all()
     
     if(request.method == 'POST'):
         id_modulo = request.POST['modulo']
         id_sensor = hex(sensores.count()).split('0x')[1]
-        modulo = ModuloModel.objects.filter(id=id_modulo).first()
+        modulo = modulos.filter(id=id_modulo).first()
         SensorModel.objects.create(
             id=id_sensor,
             modulo=modulo
         )
         
-        print(request.POST)
-        
         return redirect('sensores:listado')
     
     return render(request, 'sensor/sensor_listar.html', {
-        'sensores': sensores,
+        'sensores': sensores.filter(estado=True),
         'modulos': modulos
     })
     
