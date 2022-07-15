@@ -30,11 +30,20 @@
         <nav class="nav">
             <a class="nav__link" href="{% url 'sensores:listado' %}">SENSORES</a>
             <a class="nav__link" href="{% url 'modulos:listado' %}">MODULOS</a>
+            {% if user.is_authenticated %}
+                <a class="nav__link nav__link--logio" href="{% url 'usuarios:logout' %}">CERRAR SESION</a>
+            {% else %}
+                <a class="nav__link nav__link--logio" href="{% url 'usuarios:login' %}">INICIAR SESION</a>
+            {% endif %}
         </nav>
     </header>
     <main class="container">
         {% block contenido %}
-            <h1>Pagina de inicio</h1>
+            {% if user.is_authenticated %}
+                <h1>Bienvenido {{ user.username }}</h1>
+            {% else %}
+                <h1>Pagina de inicio</h1>
+            {% endif %}
         {% endblock %}
     </main>
 
