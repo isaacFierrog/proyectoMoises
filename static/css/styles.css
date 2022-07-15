@@ -51,6 +51,9 @@ a{
     color: #504d4a;
     background-color: #FFDCAE; 
 }
+.nav__link--logio{
+    font-weight: bold;
+}
 .boton{
     position: fixed;
     right: 2vw;
