@@ -38,13 +38,15 @@
         </nav>
     </header>
     <main class="container">
-        {% block contenido %}
-            {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
+            {% block contenido %}
                 <h1>Bienvenido {{ user.username }}</h1>
-            {% else %}
-                <h1>Pagina de inicio</h1>
-            {% endif %}
-        {% endblock %}
+            {% endblock %}
+        {% else %}
+            {% block registro %}
+                <h1>Para ver el contenido de esta pagina, es necesario registrarse</h1>
+            {% endblock %}
+        {% endif %}
     </main>
 
     <button class="boton">⬆️</button>
