@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+    Editar usuario
+{% endblock %}
+
+{% block contenido %}
+    {% if request.usuario.administrador %}
+        <h2>¿Desea eliminar al usuario {{ object.nombre }}?</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Guardar" class="btn btn-primary">
+            <a href="{% url 'usuario:listar' %}" class="btn btn-danger">
+                Cancelar
+            </a>
+        </form>
+    {% else %}
+        <h1>No tienes los permisos para acceder a esta pagina</h1>
+    {% endif %}
+{% endblock %}

@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import listar_modulos, crear_modulo, eliminar_modulo
+from .views import eliminar_modulo, ModuloListView
 
 
 urlpatterns = [
-    path('', listar_modulos, name='listado'),
-    path('crear/', crear_modulo, name='crear'),
+    path('', ModuloListView.as_view(), name='listado'),
     path('eliminar/<id>/', eliminar_modulo, name='eliminar')
 ]

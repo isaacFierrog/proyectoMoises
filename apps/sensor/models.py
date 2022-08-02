@@ -1,21 +1,17 @@
 from django.db import models
+from apps.general.models.modelos_generales import BaseModel
 
 
-class SensorModel(models.Model):
+class SensorModel(BaseModel):
     id = models.CharField(
         'Identificador de sensor',
         max_length=5,
         primary_key=True,
         blank=True
     )
-    estado = models.BooleanField(
-        'Estado del sensor',
+    conexion = models.BooleanField(
+        'Estado de la conexion del sensor',
         default=True
-    )
-    fecha_cracion = models.DateField(
-        'Fecha en que se creo el sensor',
-        auto_now_add=True,
-        auto_now=False
     )
     modulo = models.ForeignKey(
         'modulo.ModuloModel', 
@@ -35,7 +31,7 @@ class SensorModel(models.Model):
         return f'<Sensor: {self.id}>'
     
     
-class ValorModel(models.Model):
+class ValorModel(BaseModel):
     id = models.AutoField(
         'Identificador de valor',
         primary_key=True
@@ -47,15 +43,6 @@ class ValorModel(models.Model):
         'sensor.SensorModel', 
         on_delete=models.CASCADE,
         related_name='valores'
-    )
-    estado = models.BooleanField(
-        'Estado de la medicion',
-        default=True
-    )
-    fecha_medicion = models.DateField(
-        'Fecha en que se tomo la medida',
-        auto_now_add=True,
-        auto_now=False
     )
     
     class Meta:
