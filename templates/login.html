@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+    Login
+{% endblock %}
+
+{% block registro %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar" class="btn btn-primary">
+    </form>
+{% endblock %}

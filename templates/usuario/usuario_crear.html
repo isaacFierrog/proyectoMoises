@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+    Registrar usuario
+{% endblock %}
+
+{% block contenido %}
+    {% if request.user.administrador %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Guardar">
+        </form>
+    {% else %}
+        <h1>No tienes los permisos para acceder a esta pagina</h1>
+    {% endif %}
+{% endblock %}

@@ -1,21 +1,12 @@
+from lib2to3.pytree import Base
 from django.db import models
+from apps.general.models.modelos_generales import BaseModel
 
 
-class ModuloModel(models.Model):
-    id = models.CharField(
-        'Identificador de modulo',
-        max_length=5,
-        primary_key=True,
-        blank=True
-    )
-    estado = models.BooleanField(
-        'Estado del modulo',
-        default=True
-    )
-    fecha_cracion = models.DateField(
-        'Fecha en que se creo el modulo',
-        auto_now_add=True,
-        auto_now=False
+class ModuloModel(BaseModel):
+    sensor_id = models.CharField(
+        'Identificador del modulo',
+        max_length=12
     )
     
     class Meta:
