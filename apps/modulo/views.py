@@ -1,6 +1,13 @@
 from django.shortcuts import redirect, render
+from rest_framework.generics import ListCreateAPIView
 from .models import ModuloModel
-    
+from .serializers import ModuloSerializer    
+
+
+class ModuloListCreateAPIView(ListCreateAPIView):
+    serializer_class = ModuloSerializer
+    queryset = ModuloModel.objects.all()
+
     
 def listar_modulos(request):
     modulos = ModuloModel.objects.all()
