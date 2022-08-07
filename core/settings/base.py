@@ -26,15 +26,11 @@ BASE_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
 
     'rest_framework',
-
-=======
 ]
 
 LOCAL_APPS = [
->>>>>>> 83aa6e4be512664272abd6a805f129a5130b92c3
     'apps.home',
     'apps.modulo',
     'apps.sensor',
